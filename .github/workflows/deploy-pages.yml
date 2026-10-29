@@ -34,9 +34,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in index.html styles.css app.js README.md docs/PHASE-1.md .nojekyll; do
+          for file in index.html styles.css app.js README.md docs/PHASE-1.md; do
             test -s "$file" || { echo "::error::Required Phase 1 file missing or empty: $file"; exit 1; }
           done
+          test -f .nojekyll || { echo "::error::Required marker file missing: .nojekyll"; exit 1; }
           grep -q 'styles.css' index.html
           grep -q 'app.js' index.html
           echo "Required Phase 1 files and asset references are present."
