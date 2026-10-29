@@ -2,7 +2,8 @@ name: Deploy AETHER to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -10,29 +11,55 @@ permissions:
   pages: write
   id-token: write
 
+# A unique group per run prevents GitHub's concurrency queue from cancelling
+# an earlier queued deployment when another commit is pushed.
 concurrency:
-  group: github-pages
-  cancel-in-progress: true
+  group: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+  cancel-in-progress: false
 
 jobs:
-  build:
+  validate-and-build:
+    name: Validate Phase 1 and prepare site
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - name: Configure Pages
+
+      - name: Set up Node.js for syntax validation
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate required Phase 1 files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in index.html styles.css app.js README.md docs/PHASE-1.md .nojekyll; do
+            test -s "$file" || { echo "::error::Required Phase 1 file missing or empty: $file"; exit 1; }
+          done
+          grep -q 'styles.css' index.html
+          grep -q 'app.js' index.html
+          echo "Required Phase 1 files and asset references are present."
+
+      - name: Check JavaScript syntax
+        run: node --check app.js
+
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Upload static site
+
+      - name: Upload static site artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
+
   deploy:
+    name: Deploy AETHER
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: validate-and-build
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Publish to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
