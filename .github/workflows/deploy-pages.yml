@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   validate-and-build:
-    name: Validate Phase 1 and prepare site
+    name: Validate Phase 1–3 and prepare site
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -34,16 +34,20 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in index.html styles.css app.js README.md docs/PHASE-1.md; do
+          for file in index.html styles.css app.js vision.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md; do
             test -s "$file" || { echo "::error::Required Phase 1 file missing or empty: $file"; exit 1; }
           done
           test -f .nojekyll || { echo "::error::Required marker file missing: .nojekyll"; exit 1; }
           grep -q 'styles.css' index.html
           grep -q 'app.js' index.html
-          echo "Required Phase 1 files and asset references are present."
+          grep -q 'vision.js' index.html
+          echo "Required Phase 1–3 files and asset references are present."
 
       - name: Check JavaScript syntax
         run: node --check app.js
+
+      - name: Check Phase 3 JavaScript syntax
+        run: node --check vision.js
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
