@@ -7,16 +7,16 @@ AETHER is a privacy-conscious personal workspace for organizing important people
 - Responsive dashboard and mobile navigation, including a vertically scrollable sidebar
 - People & circles with name, relationship, phone, email, preferred contact method, and support notes
 - Important dates for birthdays, anniversaries, milestones, family events, and yearly recurrence
-- Reminders with due dates, completion, reopening, search, and filters
+- Smart reminders with due dates, completion, reopening, search, overdue/today/upcoming summaries, and filters
 - Categorized, searchable Memory Vault
-- Support Hub with check-ins, due dates, completion/reopening, and Communication Studio
+- Support Hub with check-ins, due dates, completion/reopening, last-check-in profile tracking, open/overdue/completed summaries, and Communication Studio
 - Help Cards for contacts, school, projects, household, emergency information, and custom notes
 - Accessibility settings: larger text, higher contrast, reduced motion, and low-distraction mode
 - Local command parser with natural aliases for navigation, reminders, memories, calls, WhatsApp messages, and WhatsApp video-call handoff
 - Optional browser speech recognition where supported
 - Number-based contact actions: calls use the saved phone number via the device's `tel:` handler; WhatsApp opens a chat using the saved number, not a username search
 - Settings phonebook manager: select individual contacts or Select All, export selected contacts as a standard `.vcf` file, and import `.vcf` files into AETHER
-- JSON workspace backup export/import and confirmed local reset
+- Privacy & Safety Center, JSON workspace backup export/import, and confirmed local reset
 
 ## Communication behavior and limitations
 
