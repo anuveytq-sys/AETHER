@@ -58,4 +58,4 @@ AETHER stores its workspace in browser `localStorage` on the current browser/dev
 
 AETHER does not have cloud synchronization, unrestricted device control, background monitoring, automatic message sending, or direct access to private phonebook data. Contact import/export is user-initiated through VCF files. Communication is performed through explicit device/app handoffs.
 
-See `docs/PHASE-1.md` and `docs/PHASE-2.md` for the feature scope and verification checklist.
+See `docs/PHASE-1.md`, `docs/PHASE-2.md`, and `docs/PHASE-3.md` for the phase scopes and verification checklists.
