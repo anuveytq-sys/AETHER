@@ -5,7 +5,7 @@
 - People profiles with relationship context, phone, email, preferred channel, support notes, and last-check-in date (updated when a linked check-in is completed).
 - Support Hub check-ins with person, due date, support type, completion, reopening, search, filtering, and open/overdue/completed overview counts.
 - Help Cards for contacts, school, projects, household, emergency information, and custom information.
-- Communication Studio for user-reviewed WhatsApp and email drafts.
+- Communication Studio for user-reviewed WhatsApp and email drafts, including friendly check-in, offer-help, birthday, and follow-up starters that remain editable before opening the app.
 - Categorized Memory Vault and smart reminder dashboard with overdue, due-today, and upcoming filters and summary counts.
 - Accessibility preferences: larger text, higher contrast, reduced motion, and low-distraction mode.
 - Flexible local text/voice command aliases for reminders, memory capture, support check-ins, view navigation, calling, WhatsApp messaging, email drafts, and video-call handoff.
