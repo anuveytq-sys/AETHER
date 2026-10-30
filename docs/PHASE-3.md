@@ -22,7 +22,7 @@
 
 - SHA-256 exact duplicate detection for supported files.
 - Perceptual image hashing for visually similar photo grouping where the browser can decode the image to canvas.
-- Image dimensions and basic file metadata.
+- Image dimensions, orientation, approximate dominant color family and brightness descriptors derived locally from sampled pixels, plus basic file metadata.
 - User-authored descriptions and tags provide practical searchable visual labels.
 - Caption/description starters are editable and must not be represented as AI-generated visual recognition.
 
