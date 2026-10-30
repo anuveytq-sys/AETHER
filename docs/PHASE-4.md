@@ -92,7 +92,7 @@ Phase 4 is an additive layer. It does not replace or rewrite the existing Phase 
 - No cloud synchronization
 - Explicit export/reset controls
 
-## Architecture
+## OpenRouter AI connection\n\nThe AETHER Intelligence screen is connected to OpenRouter through `aether-ai.js`. Settings & privacy includes a local key setup panel with connection testing and a save/remove control. A personal key is stored in this browser only and is never committed to GitHub or included in AETHER workspace backups. Because a browser-held key can be accessed by someone with access to the browser profile, use an OpenRouter key with a strict spending limit. For a shared/public deployment, the safer option is the Vercel server-side `OPENROUTER_API_KEY` environment variable; add it under Project Settings → Environment Variables → Production and redeploy. No Render service is required for the Vercel function.\n\nThe AI can answer general questions and return structured actions that are saved into the existing local Memory Vault, Reminders, Support check-ins, Help Cards, and Phase 4 checklists, capsules, timeline, summaries, and drafts. It receives a limited snapshot of local workspace metadata and document text; imported Vision media itself remains local.\n\n## Architecture
 
 `phase4.js` is maintained separately so Phase 1–3 source files remain untouched. The GitHub Pages workflow validates Phase 4 and appends it to the build copy of `app.js` only during deployment. This lets the existing application continue to use its current source while the deployed site receives the Phase 4 layer.
 
