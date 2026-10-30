@@ -3,3 +3,6 @@
 
 /* Phase 2 contact manager */
 .phonebook-row{display:flex;align-items:center;gap:12px;padding:10px 4px;border-top:1px solid var(--line);cursor:pointer}.phonebook-row span{display:flex;flex-direction:column;gap:3px}.phonebook-row small{color:var(--muted)}#phonebookList{max-height:260px;overflow:auto;margin:12px 0}.phonebook-row input,#phonebookList>label input{accent-color:var(--violet)}
+
+/* Phase 2 support overview and safety center */
+.support-stats{grid-template-columns:repeat(3,minmax(0,1fr));margin:0 0 16px}.safety-panel ul{padding-left:20px;color:var(--muted);line-height:1.8}.safety-panel li{margin:7px 0}@media(max-width:760px){.support-stats{grid-template-columns:1fr 1fr}}
