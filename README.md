@@ -18,6 +18,24 @@ AETHER is a privacy-conscious personal workspace for organizing important people
 - Settings phonebook manager: select individual contacts or Select All, export selected contacts as a standard `.vcf` file, and import `.vcf` files into AETHER
 - Privacy & Safety Center, JSON workspace backup export/import, and confirmed local reset
 
+## Phase 3 — AETHER Vision
+
+- A separate Visual Memory workspace for user-selected photos and videos.
+- Import multiple image/video files or choose a folder through the browser file picker; no silent gallery scanning.
+- Local media storage in IndexedDB with searchable metadata stored separately in localStorage.
+- Photo/video counts, event collections, date/name sorting, media-type and event filters.
+- Editable captions, descriptions, tags, dates and event names; natural-language-style search across this user-provided metadata.
+- Image previews and video playback, selected-item details, and local image dimension/file metadata.
+- Exact duplicate detection using SHA-256 fingerprints and visually similar photo grouping using a small perceptual image hash (where browser canvas decoding is supported).
+- User-reviewed sharing of selected media through the device share sheet where supported, with download fallback.
+- Metadata-only library index export; original media remains in browser storage unless explicitly shared or downloaded.
+- Optional browser voice search where speech recognition is supported.
+- Event-based collections, selected-image Q&A/search based on saved descriptions and tags, and editable caption/description starters.
+
+### Phase 3 capability boundaries
+
+A normal website cannot silently browse a phone's private gallery. AETHER Vision uses an explicit file/folder picker and only sees files the user selects. The selected media stays in this browser's IndexedDB; browser storage may be cleared or evicted and does not sync across devices. Search and Q&A use saved filenames, descriptions, tags, event names and dates. This static, offline implementation does not include a trained semantic image-recognition model or cloud AI service, so it does not claim to identify arbitrary objects or people automatically. Perceptual similarity and exact duplicate checks are local browser-side utilities, not semantic recognition. Sharing always requires a user action.
+
 ## Communication behavior and limitations
 
 AETHER hands communication actions to apps supported by the user's device/browser. A call command opens the device's caller flow; the user confirms the call there. WhatsApp commands open the saved contact's number-based chat, optionally with a prefilled message. The user reviews and sends the message in WhatsApp. A video-call command opens the WhatsApp chat; the user starts the video call inside WhatsApp. A website cannot silently place calls, send WhatsApp messages, or force a WhatsApp video call without the appropriate native app/API permissions and user action.
