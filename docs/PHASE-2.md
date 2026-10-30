@@ -2,15 +2,15 @@
 
 ## Included workspace capabilities
 
-- People profiles with relationship context, phone, email, preferred channel, and support notes.
+- People profiles with relationship context, phone, email, preferred channel, support notes, and last-check-in date (updated when a linked check-in is completed).
 - Support Hub check-ins with person, due date, support type, completion, reopening, search, and filtering.
 - Help Cards for contacts, school, projects, household, emergency information, and custom information.
 - Communication Studio for user-reviewed WhatsApp and email drafts.
-- Categorized Memory Vault and smart reminder dashboard.
+- Categorized Memory Vault and smart reminder dashboard with overdue, due-today, and upcoming filters and summary counts.
 - Accessibility preferences: larger text, higher contrast, reduced motion, and low-distraction mode.
 - Flexible local command aliases for reminders, memory capture, view navigation, calling, WhatsApp messaging, and video-call handoff.
 - Phonebook management in Settings: select one or more saved contacts, Select All, export VCF, and import VCF.
-- JSON backup/restore and confirmed local reset.
+- Privacy & Safety Center explaining local storage, explicit communication handoffs, consent, exports, and reset; JSON backup/restore and confirmed local reset.
 
 ## Communication commands
 
@@ -23,6 +23,10 @@ Examples:
 - `show people`, `show support`, `show help cards`, `show reminders`, `show memories`, `show important dates`
 
 Contact actions resolve a saved person and use the phone number stored in that person's profile. WhatsApp links use the international-number format; ten-digit local Indian numbers are prefixed with India country code 91. Store non-Indian contacts with their complete country code.
+
+## Reminder dashboard
+
+The Reminders view summarizes overdue, due-today, and upcoming items. Filters can show open, overdue, due today, upcoming, all, or completed reminders. Due-date buckets are calculated locally from the device date.
 
 ## VCF workflow
 
