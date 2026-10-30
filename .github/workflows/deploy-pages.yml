@@ -11,8 +11,6 @@ permissions:
   pages: write
   id-token: write
 
-# Serialize Pages releases: an active deploy finishes, then the newest queued
-# release deploys. This prevents an older concurrent build replacing a newer site.
 concurrency:
   group: github-pages
   cancel-in-progress: false
@@ -34,14 +32,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in index.html styles.css app.js vision.js phase4.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md; do
+          for file in index.html styles.css app.js vision.js phase4.js aether-ai.js api/aether.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md docs/PHASE-4.md; do
             test -s "$file" || { echo "::error::Required AETHER file missing or empty: $file"; exit 1; }
           done
           test -f .nojekyll || { echo "::error::Required marker file missing: .nojekyll"; exit 1; }
           grep -q 'styles.css' index.html
           grep -q 'app.js' index.html
           grep -q 'vision.js' index.html
-          echo "Required Phase 1–4 files and asset references are present."
+          echo "Required Phase 1–4 files and AI backend source are present."
 
       - name: Check JavaScript syntax
         run: node --check app.js
@@ -52,14 +50,22 @@ jobs:
       - name: Check Phase 4 JavaScript syntax
         run: node --check phase4.js
 
-      - name: Attach Phase 4 to the existing app bundle for Pages
+      - name: Check AETHER AI bridge syntax
+        run: node --check aether-ai.js
+
+      - name: Check AETHER backend syntax
+        run: node --check api/aether.js
+
+      - name: Attach Phase 4 and AI intelligence to the existing app bundle for Pages
         shell: bash
         run: |
           set -euo pipefail
           printf '\n/* AETHER PHASE 4 BUILD ATTACHMENT */\n' >> app.js
           cat phase4.js >> app.js
+          printf '\n/* AETHER OPENROUTER INTELLIGENCE BUILD ATTACHMENT */\n' >> app.js
+          cat aether-ai.js >> app.js
           node --check app.js
-          echo "Phase 4 was appended to the Pages build copy of app.js."
+          echo "Phase 4 and the OpenRouter AI bridge were appended only to the Pages build copy of app.js."
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
