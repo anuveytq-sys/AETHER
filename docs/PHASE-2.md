@@ -3,12 +3,12 @@
 ## Included workspace capabilities
 
 - People profiles with relationship context, phone, email, preferred channel, support notes, and last-check-in date (updated when a linked check-in is completed).
-- Support Hub check-ins with person, due date, support type, completion, reopening, search, and filtering.
+- Support Hub check-ins with person, due date, support type, completion, reopening, search, filtering, and open/overdue/completed overview counts.
 - Help Cards for contacts, school, projects, household, emergency information, and custom information.
 - Communication Studio for user-reviewed WhatsApp and email drafts.
 - Categorized Memory Vault and smart reminder dashboard with overdue, due-today, and upcoming filters and summary counts.
 - Accessibility preferences: larger text, higher contrast, reduced motion, and low-distraction mode.
-- Flexible local command aliases for reminders, memory capture, view navigation, calling, WhatsApp messaging, and video-call handoff.
+- Flexible local text/voice command aliases for reminders, memory capture, support check-ins, view navigation, calling, WhatsApp messaging, email drafts, and video-call handoff.
 - Phonebook management in Settings: select one or more saved contacts, Select All, export VCF, and import VCF.
 - Privacy & Safety Center explaining local storage, explicit communication handoffs, consent, exports, and reset; JSON backup/restore and confirmed local reset.
 
@@ -23,6 +23,10 @@ Examples:
 - `show people`, `show support`, `show help cards`, `show reminders`, `show memories`, `show important dates`
 
 Contact actions resolve a saved person and use the phone number stored in that person's profile. WhatsApp links use the international-number format; ten-digit local Indian numbers are prefixed with India country code 91. Store non-Indian contacts with their complete country code.
+
+## Support profile and overview
+
+People profiles include relationship, preferred contact method, support notes, and a last-check-in date. Completing a linked support check-in updates that person's last-check-in date. The Support Hub summarizes open, overdue, and completed check-ins.
 
 ## Reminder dashboard
 
