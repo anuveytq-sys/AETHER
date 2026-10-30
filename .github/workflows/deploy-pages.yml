@@ -11,10 +11,10 @@ permissions:
   pages: write
   id-token: write
 
-# A unique group per run prevents GitHub's concurrency queue from cancelling
-# an earlier queued deployment when another commit is pushed.
+# Serialize Pages releases: an active deploy finishes, then the newest queued
+# release deploys. This prevents an older concurrent build replacing a newer site.
 concurrency:
-  group: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+  group: github-pages
   cancel-in-progress: false
 
 jobs:
