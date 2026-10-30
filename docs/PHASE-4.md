@@ -92,7 +92,17 @@ Phase 4 is an additive layer. It does not replace or rewrite the existing Phase 
 - No cloud synchronization
 - Explicit export/reset controls
 
-## OpenRouter AI connection\n\nThe AETHER Intelligence screen is connected to OpenRouter through `aether-ai.js`. Settings & privacy includes a local key setup panel with connection testing and a save/remove control. A personal key is stored in this browser only and is never committed to GitHub or included in AETHER workspace backups. Because a browser-held key can be accessed by someone with access to the browser profile, use an OpenRouter key with a strict spending limit. For a shared/public deployment, the safer option is the Vercel server-side `OPENROUTER_API_KEY` environment variable; add it under Project Settings → Environment Variables → Production and redeploy. No Render service is required for the Vercel function.\n\nThe AI can answer general questions and return structured actions that are saved into the existing local Memory Vault, Reminders, Support check-ins, Help Cards, and Phase 4 checklists, capsules, timeline, summaries, and drafts. It receives a limited snapshot of local workspace metadata and document text; imported Vision media itself remains local.\n\n## Architecture
+## OpenRouter AI connection
+
+AETHER Intelligence sends all model requests through the Vercel server-side API route at `/api/aether`; the browser no longer calls OpenRouter directly. This avoids browser-to-provider CORS issues and keeps provider request handling behind the AETHER backend.
+
+Settings & privacy includes a local OpenRouter key field with connection testing and save/remove controls. The key is stored in this browser's local storage and is sent over HTTPS to the AETHER backend only when an AI request is made. It is not committed to GitHub. Anyone with access to the browser profile may be able to access a locally saved key, so use a restricted key with a small spending limit.
+
+For a shared server-side key, set `OPENROUTER_API_KEY` in the Vercel project's Production environment and redeploy. A server-side key takes precedence over a browser-supplied personal key. Render is not required for the current Vercel backend. The backend also accepts a per-request user key, so a Vercel environment variable is optional for an individual user.
+
+The AI can answer general questions and return structured actions that are saved into the existing local Memory Vault, Reminders, Support check-ins, Help Cards, and Phase 4 checklists, capsules, timeline, summaries, and drafts. It receives a limited snapshot of local workspace metadata and document text; imported Vision media itself remains local.
+
+## Architecture
 
 `phase4.js` is maintained separately so Phase 1–3 source files remain untouched. The GitHub Pages workflow validates Phase 4 and appends it to the build copy of `app.js` only during deployment. This lets the existing application continue to use its current source while the deployed site receives the Phase 4 layer.
 
