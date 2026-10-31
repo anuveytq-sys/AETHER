@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   validate-and-build:
-    name: Validate Phase 1–8 and prepare site
+    name: Validate Phase 1–9 and prepare site
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in index.html styles.css app.js vision.js phase4.js phase5.js phase7.js phase7.css phase8.js phase8-tracking.js phase8-screen-dwell.js phase8.css docs/PHASE-8.md build-phase7.js aether-ai.js api/aether.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md docs/PHASE-4.md docs/PHASE-5.md; do
+          for file in index.html styles.css app.js vision.js phase4.js phase5.js phase7.js phase7.css phase8.js phase8-tracking.js phase8-screen-dwell.js phase8.css phase9.js phase9.css docs/PHASE-8.md docs/PHASE-9.md build-phase9.js build-phase7.js aether-ai.js api/aether.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md docs/PHASE-4.md docs/PHASE-5.md; do
             test -s "$file" || { echo "::error::Required AETHER file missing or empty: $file"; exit 1; }
           done
           test -f .nojekyll || { echo "::error::Required marker file missing: .nojekyll"; exit 1; }
@@ -43,6 +43,10 @@ jobs:
           grep -q 'phase8.css' index.html
           grep -q 'phase8.js' index.html
           grep -q 'phase8-tracking.js' index.html
+          test -s phase9.js
+          test -s phase9.css
+          node --check phase9.js
+          node --check build-phase9.js
           echo "Required Phase 1–8 files and AI backend source are present."
 
       - name: Check JavaScript syntax
@@ -178,6 +182,9 @@ jobs:
           grep -q 'phase7.js' index.html
           node --check app.js
           echo "Phase 7 NEXUS was attached only to the Pages build copy."
+
+      - name: Attach Phase 9 to the Pages build copy
+        run: node build-phase9.js
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
