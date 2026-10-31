@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in index.html styles.css app.js vision.js phase4.js phase5.js phase7.js phase7.css phase8.js phase8-tracking.js phase8.css docs/PHASE-8.md build-phase7.js aether-ai.js api/aether.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md docs/PHASE-4.md docs/PHASE-5.md; do
+          for file in index.html styles.css app.js vision.js phase4.js phase5.js phase7.js phase7.css phase8.js phase8-tracking.js phase8-screen-dwell.js phase8.css docs/PHASE-8.md build-phase7.js aether-ai.js api/aether.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md docs/PHASE-4.md docs/PHASE-5.md; do
             test -s "$file" || { echo "::error::Required AETHER file missing or empty: $file"; exit 1; }
           done
           test -f .nojekyll || { echo "::error::Required marker file missing: .nojekyll"; exit 1; }
@@ -66,6 +66,9 @@ jobs:
       - name: Check COSMOSIM-style Access tracking syntax
         run: node --check phase8-tracking.js
 
+      - name: Check whole-screen edge dwell syntax
+        run: node --check phase8-screen-dwell.js
+
       - name: Check Phase 7 build attachment syntax
         run: node --check build-phase7.js
 
@@ -74,6 +77,14 @@ jobs:
 
       - name: Check AETHER backend syntax
         run: node --check api/aether.js
+
+      - name: Attach whole-screen edge dwell to the Pages build copy
+        shell: bash
+        run: |
+          set -euo pipefail
+          node -e "const fs=require('fs');const p='index.html';let s=fs.readFileSync(p,'utf8');const tag='<script src=\"phase8-tracking.js\" defer></script>';if(!s.includes(tag))throw new Error('phase8-tracking.js script tag not found');if(!s.includes('phase8-screen-dwell.js'))s=s.replace(tag,tag+'<script src=\"phase8-screen-dwell.js\" defer></script>');fs.writeFileSync(p,s);"
+          grep -q 'phase8-screen-dwell.js' index.html
+          echo "Whole-screen edge dwell was attached only to the Pages build copy."
 
       - name: Attach Phase 4 and AI intelligence to the existing app bundle for Pages
         shell: bash
