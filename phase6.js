@@ -19,7 +19,7 @@ function toast(t){let x=$('#toast');if(!x){x=document.createElement('div');x.id=
 function p1(){return read(P1)||{people:[]}}
 function linkContact(x){let p=p1();p.people=Array.isArray(p.people)?p.people:[];let old=p.people.find(y=>String(y.name||'').toLowerCase()===String(x.name||'').toLowerCase());if(!old){p.people.unshift({id:uid(),name:x.name,circle:x.circle||'Other',relationship:x.relationship||'',phone:'',email:'',preferred:'Any',notes:'Added from AETHER Atlas',createdAt:new Date().toISOString()});localStorage.setItem(P1,JSON.stringify(p))}}
 function safe(v){return esc(v).replace(/\n/g,' ')}
-function nav(){let n=$('.sidebar nav');if(n&&!n.querySelector('[data-view="phase6"]')){let b=document.createElement('button');b.className='nav';b.dataset.view='phase6';b.textContent='✦ AETHER Atlas · Phase 6';n.insertBefore(b,n.querySelector('[data-view="settings"]')||null)}}
+function nav(){let n=$('.sidebar nav');if(n&&!n.querySelector('[data-view="phase6"]')){let b=document.createElement('button');b.className='nav';b.dataset.view='phase6';b.textContent='✦ AETHER Atlas';n.insertBefore(b,n.querySelector('[data-view="settings"]')||null)}}
 function mount(){if($('#view-phase6'))return;let s=document.createElement('section');s.className='view';s.id='view-phase6';
 let tabs=['home',...Object.keys(defs),'map','insights','privacy'];
 let names={home:'Atlas overview',people:'Family & friends',groups:'Together spaces',requests:'Support network',offers:'Offer help',updates:'Group activity',memories:'Shared memories',events:'Events & celebrations',goals:'Shared goals',learning:'Learning circle',legacy:'Family legacy',map:'Connection map',insights:'Insights & AI',privacy:'Trust & privacy'};
