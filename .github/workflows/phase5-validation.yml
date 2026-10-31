@@ -1,0 +1,26 @@
+name: Validate AETHER Phase 5 branch
+on:
+  push:
+    branches:
+      - phase5/autonomous-intelligence
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate JavaScript syntax
+        run: |
+          set -euo pipefail
+          node --check app.js
+          node --check vision.js
+          node --check phase4.js
+          node --check phase5.js
+          node --check aether-ai.js
+          node --check api/aether.js
+      - name: Verify Phase 5 is loaded
+        run: grep -q 'phase5.js' index.html
