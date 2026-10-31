@@ -49,6 +49,14 @@ Phase 5 stays in browser localStorage; no cloud sync or encryption is claimed. B
 
 A normal website cannot silently browse a phone's private gallery. AETHER Vision uses an explicit file/folder picker and only sees files the user selects. The selected media stays in this browser's IndexedDB; browser storage may be cleared or evicted and does not sync across devices. Search and Q&A use saved filenames, descriptions, tags, event names and dates. This static, offline implementation does not include a trained semantic image-recognition model or cloud AI service, so it does not claim to identify arbitrary objects or people automatically. Perceptual similarity and exact duplicate checks are local browser-side utilities, not semantic recognition. Sharing always requires a user action.
 
+## Phase 8 — AETHER Access
+
+- Separate accessibility profile for larger text, high contrast, reduced motion, low-distraction layout and strong focus indicators.
+- Optional browser voice navigation for local page navigation and scrolling, with explicit microphone start/stop.
+- Optional camera-based head pointer, adjustable dwell-to-activate and optional double-blink activation using an on-device face-landmark model.
+- Screen-reader live announcements, keyboard shortcut, Escape-to-stop and a basic structural accessibility audit.
+- Camera and microphone are opt-in; this module does not record or upload camera frames. Browser/model support and accuracy vary, and manual screen-reader testing is required. The built-in audit is not a WCAG certification.
+
 ## Communication behavior and limitations
 
 AETHER hands communication actions to apps supported by the user's device/browser. A call command opens the device's caller flow; the user confirms the call there. WhatsApp commands open the saved contact's number-based chat, optionally with a prefilled message. The user reviews and sends the message in WhatsApp. A video-call command opens the WhatsApp chat; the user starts the video call inside WhatsApp. A website cannot silently place calls, send WhatsApp messages, or force a WhatsApp video call without the appropriate native app/API permissions and user action.
