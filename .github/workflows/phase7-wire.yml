@@ -1,0 +1,36 @@
+name: Wire AETHER Phase 7
+on:
+  push:
+    branches: [feature/phase7-nexus]
+permissions:
+  contents: write
+jobs:
+  wire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Attach Phase 7 to app bundle
+        run: |
+          set -euo pipefail
+          if ! grep -q 'aether.phase7.nexus.v1' app.js; then
+            printf '\n/* AETHER PHASE 7 NEXUS ATTACHMENT */\n' >> app.js
+            cat phase7.js >> app.js
+          fi
+          node --check app.js
+      - name: Wire standalone index assets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html'); s=p.read_text()
+          if 'phase7.css' not in s: s=s.replace('</head>','<link rel="stylesheet" href="phase7.css"></head>')
+          if 'phase7.js' not in s: s=s.replace('</body>','<script src="phase7.js" defer></script></body>')
+          p.write_text(s)
+          PY
+      - name: Commit wiring
+        run: |
+          git config user.name 'AETHER Phase 7 Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add app.js index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Attach AETHER Phase 7 NEXUS to the application bundle'
+          git push
