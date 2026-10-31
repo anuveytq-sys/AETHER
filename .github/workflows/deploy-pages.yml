@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   validate-and-build:
-    name: Validate Phase 1–4 and prepare site
+    name: Validate Phase 1–5 and prepare site
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -32,13 +32,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in index.html styles.css app.js vision.js phase4.js aether-ai.js api/aether.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md docs/PHASE-4.md; do
+          for file in index.html styles.css app.js vision.js phase4.js phase5.js aether-ai.js api/aether.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md docs/PHASE-4.md docs/PHASE-5.md; do
             test -s "$file" || { echo "::error::Required AETHER file missing or empty: $file"; exit 1; }
           done
           test -f .nojekyll || { echo "::error::Required marker file missing: .nojekyll"; exit 1; }
           grep -q 'styles.css' index.html
           grep -q 'app.js' index.html
           grep -q 'vision.js' index.html
+          grep -q 'phase5.js' index.html
           echo "Required Phase 1–4 files and AI backend source are present."
 
       - name: Check JavaScript syntax
@@ -49,6 +50,9 @@ jobs:
 
       - name: Check Phase 4 JavaScript syntax
         run: node --check phase4.js
+
+      - name: Check Phase 5 JavaScript syntax
+        run: node --check phase5.js
 
       - name: Check AETHER AI bridge syntax
         run: node --check aether-ai.js

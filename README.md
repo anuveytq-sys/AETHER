@@ -18,6 +18,19 @@ AETHER is a privacy-conscious personal workspace for organizing important people
 - Settings phonebook manager: select individual contacts or Select All, export selected contacts as a standard `.vcf` file, and import `.vcf` files into AETHER
 - Privacy & Safety Center, JSON workspace backup export/import, and confirmed local reset
 
+## Phase 5 — Autonomous Intelligence
+
+- Advanced local memories with importance, confidence, topic association, expiry metadata and duplicate-title protection.
+- Relationship notes based on user-saved contacts; event planner and optional browser notifications.
+- Goal decomposition, milestone checklists, project workspaces and reviewed multi-step workflow previews.
+- Cross-phase universal keyword search, situational dashboard, optional suggestions, life timeline and connected-record graph.
+- Personal knowledge base, local text-document extraction, date/action extraction and research logs.
+- Vision metadata search over Phase 3 captions, descriptions, tags and dates supplied by the user.
+- Time capsules, AI context controls, Phase 5 backup/import, developer checklist, diagnostics, local analytics and extension registry.
+- Optional voice input where supported.
+
+Phase 5 stays in browser localStorage; no cloud sync or encryption is claimed. Browser notifications depend on permission and browser availability, and are not guaranteed background alarms. Text extraction supports readable text files; PDF extraction is not implemented. Search is local keyword ranking, not vector semantic search. Vision search uses user-supplied metadata and does not claim automatic identity/object recognition. Relationship notes are user-authored. Workflows preview steps and never silently execute external actions.
+
 ## Phase 3 — AETHER Vision
 
 - A separate Visual Memory workspace for user-selected photos and videos.
