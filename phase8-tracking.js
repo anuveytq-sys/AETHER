@@ -1,4 +1,4 @@
-(()=>{'use strict';
+(()=>{'use strict';function init(){
 const $=s=>document.querySelector(s);
 const style=document.createElement('style');
 style.textContent='.cosmosim-tracking-pointer{position:fixed;z-index:100030;width:19px;height:19px;border:2px solid #72f2ff;border-radius:50%;box-shadow:0 0 0 5px #72f2ff22,0 0 18px #42dfffaa;transform:translate(-50%,-50%);pointer-events:none;display:none;will-change:left,top}.cosmosim-tracking-pointer.is-active{display:block}.cosmosim-tracking-pointer:after{content:"";position:absolute;inset:5px;border-radius:50%;background:#72f2ff}.cosmosim-tracking-pointer.is-confirming{border-color:#8fffc9;box-shadow:0 0 0 8px #8fffc933,0 0 22px #8fffc9cc}#a8Video{display:block;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}#a8Video.a8-tracking-live{opacity:1}.a8-tracking-controls{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.a8-tracking-controls button{flex:1 1 42%;min-height:36px;padding:8px 9px;font-size:11px}#a8HeadStatus{font:10px/1.5 ui-monospace,monospace}';
@@ -52,4 +52,6 @@ window.addEventListener('resize',()=>{pointerX=Math.min(pointerX,innerWidth-8);p
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&stream)stopCamera('CAMERA OFF · ESC PRESSED')});
 const original=window.AETHER_PHASE8;if(original)window.AETHER_PHASE8={...original,stop:()=>{stopCamera();original.stop?.()}};
 window.AETHER_COSMOSIM_TRACKING={stop:stopCamera,getState:()=>({active:!!stream,paused,pointerMode,blinkConfirm,dwellScroll})};
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
