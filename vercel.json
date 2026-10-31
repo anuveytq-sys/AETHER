@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node build-phase7.js",
+  "buildCommand": "node build-phase7.js && node -e \"const fs=require('fs');const p='index.html';let s=fs.readFileSync(p,'utf8');const tag='<script src=\\\"phase8-tracking.js\\\" defer></script>';if(!s.includes(tag))throw new Error('phase8-tracking.js script tag not found');if(!s.includes('phase8-screen-dwell.js'))s=s.replace(tag,tag+'<script src=\\\"phase8-screen-dwell.js\\\" defer></script>');fs.writeFileSync(p,s);\"",
   "outputDirectory": ".",
   "framework": null
 }
