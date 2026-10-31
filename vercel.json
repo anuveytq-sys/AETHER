@@ -1,0 +1,5 @@
+{
+  "buildCommand": "node build-phase7.js",
+  "outputDirectory": ".",
+  "framework": null
+}

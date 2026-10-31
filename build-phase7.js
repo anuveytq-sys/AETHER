@@ -1,0 +1,10 @@
+const fs=require('fs');
+const index=fs.readFileSync('index.html','utf8');
+let html=index;
+if(!html.includes('phase7.css')) html=html.replace('</head>','<link rel="stylesheet" href="phase7.css"></head>');
+if(!html.includes('phase7.js')) html=html.replace('</body>','<script src="phase7.js" defer></script></body>');
+fs.writeFileSync('index.html',html);
+let app=fs.readFileSync('app.js','utf8');
+const phase=fs.readFileSync('phase7.js','utf8');
+if(!app.includes('aether.phase7.nexus.v1')) fs.writeFileSync('app.js',app+'\n/* AETHER PHASE 7 NEXUS BUILD ATTACHMENT */\n'+phase+'\n');
+console.log('AETHER Phase 7 build attachment complete');
