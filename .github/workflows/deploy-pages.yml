@@ -40,6 +40,8 @@ jobs:
           grep -q 'app.js' index.html
           grep -q 'vision.js' index.html
           grep -q 'phase5.js' index.html
+          grep -q 'phase8.css' index.html
+          grep -q 'phase8.js' index.html
           echo "Required Phase 1–8 files and AI backend source are present."
 
       - name: Check JavaScript syntax
