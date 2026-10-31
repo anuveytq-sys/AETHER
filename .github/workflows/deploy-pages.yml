@@ -67,6 +67,78 @@ jobs:
           node --check app.js
           echo "Phase 4 and the OpenRouter AI bridge were appended only to the Pages build copy of app.js."
 
+      - name: Contain OpenRouter settings panel on mobile
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >> styles.css <<'CSS'
+          /* AETHER OpenRouter settings — mobile containment only */
+          #aetherOpenRouterSettings {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            overflow: hidden;
+          }
+          #aetherOpenRouterSettings * {
+            box-sizing: border-box;
+            max-width: 100%;
+          }
+          #aetherOpenRouterSettings h3,
+          #aetherOpenRouterSettings p {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+          }
+          #aetherOpenRouterSettings label {
+            display: grid;
+            gap: 7px;
+            min-width: 0;
+            margin-top: 12px;
+          }
+          #aetherOpenRouterSettings input,
+          #aetherOpenRouterSettings select {
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
+          }
+          #aetherOpenRouterSettings .p4-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-width: 0;
+            margin-top: 12px;
+          }
+          #aetherOpenRouterSettings .p4-actions button {
+            min-width: 0;
+            max-width: 100%;
+            flex: 1 1 135px;
+          }
+          #aetherOpenRouterSettings .p4-result {
+            min-width: 0;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+          }
+          @media (max-width: 760px) {
+            #aetherOpenRouterSettings {
+              padding: 14px;
+              border-radius: 14px;
+            }
+            #aetherOpenRouterSettings h3 {
+              font-size: 15px;
+              line-height: 1.25;
+            }
+            #aetherOpenRouterSettings > p {
+              font-size: 10px;
+              line-height: 1.55;
+            }
+            #aetherOpenRouterSettings .p4-actions button {
+              flex: 1 1 100%;
+            }
+          }
+          CSS
+          echo "OpenRouter settings panel containment CSS added only to the Pages build copy."
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
