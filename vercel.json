@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node build-phase7.js && node build-edge-dwell.js && node build-phase9.js",
+  "buildCommand": "node build-phase7.js && node build-edge-dwell.js && node build-phase9.js && node build-phase10.js",
   "outputDirectory": ".",
   "framework": null
 }

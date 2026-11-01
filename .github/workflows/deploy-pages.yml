@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   validate-and-build:
-    name: Validate Phase 1–9 and prepare site
+    name: Validate Phase 1–10 and prepare site
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -28,11 +28,11 @@ jobs:
         with:
           node-version: 22
 
-      - name: Validate required Phase 1–8 files
+      - name: Validate required AETHER files
         shell: bash
         run: |
           set -euo pipefail
-          for file in index.html styles.css app.js vision.js phase4.js phase5.js phase7.js phase7.css phase8.js phase8-tracking.js phase8-screen-dwell.js phase8.css phase9.js phase9.css docs/PHASE-8.md docs/PHASE-9.md build-phase9.js build-phase7.js aether-ai.js api/aether.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md docs/PHASE-4.md docs/PHASE-5.md; do
+          for file in index.html styles.css app.js vision.js phase4.js phase5.js phase7.js phase7.css phase8.js phase8-tracking.js phase8-screen-dwell.js phase8.css phase9.js phase9.css phase10.js phase10.css docs/PHASE-8.md docs/PHASE-9.md docs/PHASE-10.md build-phase9.js build-phase10.js build-phase7.js aether-ai.js api/aether.js README.md docs/PHASE-1.md docs/PHASE-2.md docs/PHASE-3.md docs/PHASE-4.md docs/PHASE-5.md; do
             test -s "$file" || { echo "::error::Required AETHER file missing or empty: $file"; exit 1; }
           done
           test -f .nojekyll || { echo "::error::Required marker file missing: .nojekyll"; exit 1; }
@@ -43,11 +43,11 @@ jobs:
           grep -q 'phase8.css' index.html
           grep -q 'phase8.js' index.html
           grep -q 'phase8-tracking.js' index.html
-          test -s phase9.js
-          test -s phase9.css
           node --check phase9.js
+          node --check phase10.js
           node --check build-phase9.js
-          echo "Required Phase 1–8 files and AI backend source are present."
+          node --check build-phase10.js
+          echo "AETHER Phase 1–10 source files are present and syntactically valid."
 
       - name: Check JavaScript syntax
         run: node --check app.js
@@ -88,7 +88,6 @@ jobs:
           set -euo pipefail
           node -e "const fs=require('fs');const p='index.html';let s=fs.readFileSync(p,'utf8');const tag='<script src=\"phase8-tracking.js\" defer></script>';if(!s.includes(tag))throw new Error('phase8-tracking.js script tag not found');if(!s.includes('phase8-screen-dwell.js'))s=s.replace(tag,tag+'<script src=\"phase8-screen-dwell.js\" defer></script>');fs.writeFileSync(p,s);"
           grep -q 'phase8-screen-dwell.js' index.html
-          echo "Whole-screen edge dwell was attached only to the Pages build copy."
 
       - name: Attach Phase 4 and AI intelligence to the existing app bundle for Pages
         shell: bash
@@ -99,7 +98,6 @@ jobs:
           printf '\n/* AETHER OPENROUTER INTELLIGENCE BUILD ATTACHMENT */\n' >> app.js
           cat aether-ai.js >> app.js
           node --check app.js
-          echo "Phase 4 and the OpenRouter AI bridge were appended only to the Pages build copy of app.js."
 
       - name: Contain OpenRouter settings panel on mobile
         shell: bash
@@ -107,84 +105,33 @@ jobs:
           set -euo pipefail
           cat >> styles.css <<'CSS'
           /* AETHER OpenRouter settings — mobile containment only */
-          #aetherOpenRouterSettings {
-            box-sizing: border-box;
-            width: 100%;
-            max-width: 100%;
-            min-width: 0;
-            overflow: hidden;
-          }
-          #aetherOpenRouterSettings * {
-            box-sizing: border-box;
-            max-width: 100%;
-          }
-          #aetherOpenRouterSettings h3,
-          #aetherOpenRouterSettings p {
-            overflow-wrap: anywhere;
-            word-break: break-word;
-          }
-          #aetherOpenRouterSettings label {
-            display: grid;
-            gap: 7px;
-            min-width: 0;
-            margin-top: 12px;
-          }
-          #aetherOpenRouterSettings input,
-          #aetherOpenRouterSettings select {
-            width: 100%;
-            min-width: 0;
-            max-width: 100%;
-          }
-          #aetherOpenRouterSettings .p4-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            min-width: 0;
-            margin-top: 12px;
-          }
-          #aetherOpenRouterSettings .p4-actions button {
-            min-width: 0;
-            max-width: 100%;
-            flex: 1 1 135px;
-          }
-          #aetherOpenRouterSettings .p4-result {
-            min-width: 0;
-            max-width: 100%;
-            overflow-wrap: anywhere;
-            word-break: break-word;
-          }
-          @media (max-width: 760px) {
-            #aetherOpenRouterSettings {
-              padding: 14px;
-              border-radius: 14px;
-            }
-            #aetherOpenRouterSettings h3 {
-              font-size: 15px;
-              line-height: 1.25;
-            }
-            #aetherOpenRouterSettings > p {
-              font-size: 10px;
-              line-height: 1.55;
-            }
-            #aetherOpenRouterSettings .p4-actions button {
-              flex: 1 1 100%;
-            }
-          }
+          #aetherOpenRouterSettings{box-sizing:border-box;width:100%;max-width:100%;min-width:0;overflow:hidden}
+          #aetherOpenRouterSettings *{box-sizing:border-box;max-width:100%}
+          #aetherOpenRouterSettings h3,#aetherOpenRouterSettings p{overflow-wrap:anywhere;word-break:break-word}
+          #aetherOpenRouterSettings label{display:grid;gap:7px;min-width:0;margin-top:12px}
+          #aetherOpenRouterSettings input,#aetherOpenRouterSettings select{width:100%;min-width:0;max-width:100%}
+          #aetherOpenRouterSettings .p4-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0;margin-top:12px}
+          #aetherOpenRouterSettings .p4-actions button{min-width:0;max-width:100%;flex:1 1 135px}
+          #aetherOpenRouterSettings .p4-result{min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+          @media (max-width:760px){#aetherOpenRouterSettings{padding:14px;border-radius:14px}#aetherOpenRouterSettings h3{font-size:15px;line-height:1.25}#aetherOpenRouterSettings>p{font-size:10px;line-height:1.55}#aetherOpenRouterSettings .p4-actions button{flex:1 1 100%}}
           CSS
-          echo "OpenRouter settings panel containment CSS added only to the Pages build copy."
 
       - name: Attach Phase 7 NEXUS to the Pages build copy
-        shell: bash
         run: |
-          set -euo pipefail
           node build-phase7.js
           grep -q 'phase7.css' index.html
           grep -q 'phase7.js' index.html
           node --check app.js
-          echo "Phase 7 NEXUS was attached only to the Pages build copy."
 
       - name: Attach Phase 9 to the Pages build copy
         run: node build-phase9.js
+
+      - name: Attach Phase 10 to the Pages build copy
+        run: |
+          node build-phase10.js
+          grep -q 'phase10.css' index.html
+          grep -q 'phase10.js' index.html
+          node --check phase10.js
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
