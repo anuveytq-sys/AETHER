@@ -1,7 +1,7 @@
 /* AETHER SCI-FI ASSEMBLY — decorative UI only; no app data or feature logic */
 (()=>{'use strict';
 if(window.__AETHER_ASSEMBLY_UI__)return;window.__AETHER_ASSEMBLY_UI__=true;
-const SELECTOR='.hero,.page-head,.section-title,.stats article,.panel,.person,.memory,.event,.vision-notice,.vision-card,.vision-side .panel,.support-banner,.settings-grid>article,.p5-card,.p5-item,.p5-ai-planner,.p9-card,.p9-feature,footer';
+const SELECTOR='.hero,.page-head,.section-title,.stats article,.panel,.memory,.event,.vision-notice,.vision-card,.vision-side .panel,.support-banner,.settings-grid>article,.p5-card,.p5-item,.p5-ai-planner,.p9-card,.p9-feature,footer';
 const reduced=()=>document.body.classList.contains('reduced-motion')||window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let observer=null,frame=0;
 function prepare(root=document){
@@ -20,7 +20,7 @@ function prepare(root=document){
 function init(){
  if('IntersectionObserver'in window&&!reduced()){
   observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
-   if(entry.isIntersecting){const el=entry.target;el.classList.add('is-assembled');if(el.matches('.panel,.person,.memory,.event,.vision-card,.p5-card,.p9-card,.p9-feature'))el.classList.add('aether-assembly-glow');observer.unobserve(el)}
+   if(entry.isIntersecting){const el=entry.target;el.classList.add('is-assembled');if(el.matches('.panel,.memory,.event,.vision-card,.p5-card,.p9-card,.p9-feature'))el.classList.add('aether-assembly-glow');observer.unobserve(el)}
   }),{root:null,rootMargin:'0px 0px -9% 0px',threshold:.08});
  }
  prepare(document);
