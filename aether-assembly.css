@@ -4,7 +4,7 @@ html{scroll-behavior:smooth}
 body{background-color:#050914;background-image:radial-gradient(ellipse at 72% -12%,rgba(91,84,255,.22),transparent 43%),radial-gradient(ellipse at 8% 40%,rgba(27,190,219,.07),transparent 36%),linear-gradient(180deg,#070b18,#050914 65%,#080d1b)}
 body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.16;background-image:linear-gradient(rgba(119,205,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(119,205,255,.08) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
 body:after{content:"";position:fixed;z-index:0;pointer-events:none;inset:0;background:radial-gradient(420px circle at var(--aether-pointer-x,50%) var(--aether-pointer-y,20%),rgba(89,220,255,.10),transparent 70%);opacity:var(--aether-pointer-opacity,0);transition:opacity .25s}
-.shell,dialog,#toast{position:relative;z-index:1}
+.shell{position:relative;z-index:1}dialog{z-index:30}#toast{z-index:20}
 .sidebar{background:rgba(5,10,23,.88);border-right-color:rgba(125,247,255,.13);box-shadow:10px 0 50px rgba(0,0,0,.16)}
 .brand .mark{box-shadow:0 0 18px rgba(125,247,255,.35),0 0 48px rgba(165,139,255,.22);animation:aether-mark-pulse 4.5s ease-in-out infinite}
 .nav{transition:background .25s,border-color .25s,color .25s,box-shadow .25s,transform .25s}
